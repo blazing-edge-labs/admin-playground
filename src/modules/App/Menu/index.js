@@ -16,6 +16,7 @@ class Navigation extends Component {
 
     this.renderNavigation = this.renderNavigation.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
+    this.isActive = this.isActive.bind(this)
   }
 
   handleLogout () {
@@ -24,14 +25,24 @@ class Navigation extends Component {
     dispatch(logoutSuccess())
   }
 
+  isActive (base, exact) {
+    const { location } = this.props
+
+    if (location.pathname.indexOf(base) === -1) return false
+
+    if (exact) return location.pathname === base
+
+    return true
+  }
+
   renderNavigation () {
-    // TODO: Add matching logic to highlight current route in the menu
     // TODO: Look into support for icons, and nested menu
 
     const navArray = [
       {
         text: 'Homepage',
-        link: '/'
+        link: '/',
+        exact: true
       },
       {
         text: 'Form Example',
@@ -39,13 +50,15 @@ class Navigation extends Component {
       },
       {
         text: 'Random page',
-        link: '/randomPage'
+        link: '/longer/link'
       }
     ]
+
     return navArray.map(elem => (
       <MenuItem
         key={elem.text}
         caption={elem.text}
+        className={this.isActive(elem.link, elem.exact) && 'active'}
         onClick={() => this.props.history.push(elem.link)}
       />
     ))
@@ -69,7 +82,8 @@ class Navigation extends Component {
 
 Navigation.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired
 }
 
 export default withRouter(connect()(Navigation))
