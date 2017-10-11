@@ -29,7 +29,6 @@ class Login extends Component {
   render () {
     const { handleSubmit, error } = this.props
 
-    console.log(error)
     return (
       <div className='page'>
         <main className='wrapper'>
@@ -64,7 +63,8 @@ class Login extends Component {
 
 Login.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  error: PropTypes.string
 }
 
 export default connect()(reduxForm({
