@@ -1,0 +1,106 @@
+{
+  "name": "admin-playground",
+  "version": "0.0.1",
+  "description": "Admin playground",
+  "scripts": {
+    "build": "NODE_ENV=production ./node_modules/webpack/bin/webpack.js --config ./webpack.prod.config.js --progress --profile --colors",
+    "snapshots": "jest -u",
+    "test": "jest",
+    "start": "node prod.js",
+    "dev-start": "node server.js",
+    "heroku-postbuild": "npm run build"
+  },
+  "author": "Blazing Edge Labs",
+  "devDependencies": {
+    "babel-eslint": "^8.0.1",
+    "babel-jest": "^21.2.0",
+    "connect-history-api-fallback": "^1.3.0",
+    "enzyme": "^3.1.0",
+    "eslint": "^4.2.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-config-standard-react": "^5.0.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^7.1.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "fetch-mock": "^5.13.0",
+    "jest": "^21.2.1",
+    "node-sass": "^4.5.3",
+    "postcss-loader": "^2.0.6",
+    "prop-types": "^15.6.0",
+    "react-addons-test-utils": "^15.6.2",
+    "react-test-renderer": "^16.0.0",
+    "redux-mock-store": "^1.3.0",
+    "sass-loader": "^6.0.6",
+    "standard": "^10.0.3",
+    "webpack-dev-middleware": "^1.12.0",
+    "webpack-hot-middleware": "^2.19.1"
+  },
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-3": "^6.24.1",
+    "css-loader": "^0.28.7",
+    "es6-promise": "^4.1.1",
+    "express": "^4.16.1",
+    "file-loader": "^1.1.5",
+    "html-webpack-plugin": "^2.30.1",
+    "moment": "^2.18.1",
+    "postcss": "^6.0.13",
+    "postcss-cssnext": "^3.0.2",
+    "postcss-each": "^0.10.0",
+    "postcss-import": "^11.0.0",
+    "postcss-mixins": "^6.1.1",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-hot-loader": "^3.0.0-beta.7",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
+    "react-toolbox": "^2.0.0-beta.12",
+    "redux": "^3.7.2",
+    "redux-form": "^7.1.0",
+    "redux-thunk": "^2.2.0",
+    "store": "^2.0.12",
+    "style-loader": "^0.19.0",
+    "url-loader": "^0.6.2",
+    "validator": "^9.0.0",
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.9.1",
+    "whatwg-fetch": "^2.0.3"
+  },
+  "engines": {
+    "node": "8"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "ignore": [
+      "**/*test*",
+      "src/utils/api.js",
+      "src/utils/createFormData.js",
+      "src/constants/application.js"
+    ]
+  },
+  "jest": {
+    "cacheDirectory": "../test/cache",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.js",
+      "!setupTests.js"
+    ],
+    "coverageDirectory": "../test/coverage",
+    "globals": {
+      "__API_URL__": "http://localhost:3000"
+    },
+    "setupFiles": [
+      "./setupTests.js"
+    ],
+    "testEnvironment": "node",
+    "testRegex": "^.*test.*\\.js$",
+    "timers": "fake",
+    "rootDir": "src"
+  }
+}
