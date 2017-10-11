@@ -32,7 +32,7 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development'),
-      __API_URL__: JSON.stringify('http://localhost:3000')
+      __API_URL__: JSON.stringify('https://api-skeleton-v2.herokuapp.com')
     }),
     new webpack.NoEmitOnErrorsPlugin()
   ],

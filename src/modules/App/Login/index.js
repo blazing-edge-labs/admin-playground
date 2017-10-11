@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { reduxForm, Field } from 'redux-form'
+import { reduxForm, Field, SubmissionError } from 'redux-form'
 import { Card } from 'react-toolbox/lib/card'
 // import { TextField } from 'redux-form-material-ui'
 
 import { Button } from 'react-toolbox/lib/button'
+import ErrorComponent from 'components/Error'
 import Input from 'components/Input'
-import { loginSuccess } from 'actions/user'
+import { authenticate } from 'actions/user'
 import { isRequired } from 'utils/validator'
 
 import './style.sass'
@@ -17,21 +18,18 @@ class Login extends Component {
     super(props)
 
     this.handleSubmit = this.handleSubmit.bind(this)
-
-    this.state = {
-      username: '',
-      password: ''
-    }
   }
 
-  handleSubmit (e) {
+  handleSubmit (values) {
     const { dispatch } = this.props
 
-    dispatch(loginSuccess())
+    return dispatch(authenticate(values))
   }
 
   render () {
-    const { handleSubmit } = this.props
+    const { handleSubmit, error } = this.props
+
+    console.log(error)
     return (
       <div className='page'>
         <main className='wrapper'>
@@ -40,8 +38,8 @@ class Login extends Component {
             <form onSubmit={handleSubmit(this.handleSubmit)}>
               <Field
                 component={Input}
-                name='username'
-                label='Username'
+                name='email'
+                label='Email'
                 floating
                 validate={isRequired}
               />
@@ -51,11 +49,11 @@ class Login extends Component {
                 name='password'
                 label='Password'
                 floating
-                validate={isRequired}
               />
               <div className='center'>
                 <Button raised type='submit' className='button' primary label='Login' />
               </div>
+              <ErrorComponent error={error} />
             </form>
           </Card>
         </main>

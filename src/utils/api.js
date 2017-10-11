@@ -1,5 +1,6 @@
 import 'whatwg-fetch'
 import store from 'store'
+import { SubmissionError } from 'redux-form'
 
 const encodeComponent = str =>
   encodeURIComponent(str)
@@ -55,10 +56,21 @@ const jsonParser = response =>
   response.json()
     .then(body => ({ response, body }))
 
+const extractError = error => {
+  let debugInfo = { _error: error.error }
+  if (error.code === 400) {
+    error.errorv.body.forEach(err => {
+      debugInfo[err.path] = err.type
+    })
+  }
+  return debugInfo
+}
+
 const handler = ({ response, body = {} }) => {
   if (body.error) {
     const error = new Error(body.error)
     error.code = body.code
+    error.debugInfo = extractError(body)
     error.status = body.status || response.status
     throw error
   }
@@ -72,10 +84,13 @@ const handler = ({ response, body = {} }) => {
   return body.data
 }
 
-const handle401 = (error) => {
-  if (error && error.status === 401) {
-    //Router.pushRoute('/login')
+const errorHandler = (error) => {
+  if (error.status === 401) {
+    // Router.pushRoute('/login')
   }
+
+  if (error.debugInfo) throw new SubmissionError(error.debugInfo)
+
   throw error
 }
 
@@ -85,7 +100,7 @@ function fetchApi (path, options = {}) {
   return fetch(getApiUrl(path, query), getOptions(opts))
     .then(jsonParser)
     .then(handler)
-    .catch(handle401)
+    .catch(errorHandler)
 }
 
 const getApi = (path, query, options) =>

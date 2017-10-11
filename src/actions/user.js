@@ -1,5 +1,4 @@
 import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from 'constants/actions'
-import parseErrors from 'utils/parseErrors'
 import api from 'utils/api'
 import store from 'store'
 
@@ -16,3 +15,12 @@ export const loginSuccess = user => ({
 export const logoutSuccess = () => ({
   type: LOGOUT_SUCCESS
 })
+
+export const authenticate = values =>
+  dispatch => (
+    api.post('auth', values)
+      .then(data => {
+        store.set('token', `Bearer ${data.token}`)
+        return dispatch(loginSuccess())
+      })
+  )
