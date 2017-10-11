@@ -34,12 +34,12 @@ class Navigation extends Component {
         link: '/'
       },
       {
-        text: 'Second page',
-        link: '/secondPage'
+        text: 'Form Example',
+        link: '/formExample'
       },
       {
-        text: 'Third page',
-        link: '/thirdPage'
+        text: 'Random page',
+        link: '/randomPage'
       }
     ]
     return navArray.map(elem => (

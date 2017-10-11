@@ -1,20 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Input from 'react-toolbox/lib/input'
+import Dropdown from 'react-toolbox/lib/dropdown'
 
 import { hasError } from 'utils/validator'
 
-const InputComponent = ({ input, meta, ...rest }) => (
-  <Input
+const Select = ({ input, meta, ...rest }) => (
+  <Dropdown
     {...input}
     {...rest}
     error={hasError(meta)}
   />
 )
 
-InputComponent.propTypes = {
+Select.propTypes = {
   input: PropTypes.object.isRequired,
   meta: PropTypes.object.isRequired
 }
 
-export default InputComponent
+export default Select
