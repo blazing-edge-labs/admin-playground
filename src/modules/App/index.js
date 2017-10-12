@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux'
+import store from 'store'
 
 import theStore from './../../store'
 import { reAuthenticate } from 'actions/user'
@@ -10,14 +11,12 @@ import Content from './Content'
 import Login from './Login'
 
 class App extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
 
-    console.log('useful constructor')
-
-    theStore.dispatch(reAuthenticate())
-
-    // TODO: read token from storage and authenticate with API
+    if (store.get('token')) {
+      theStore.dispatch(reAuthenticate())
+    }
   }
 
   render () {
