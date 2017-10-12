@@ -71,7 +71,7 @@ class Navigation extends Component {
           User Block
         </div>
         <div className='center'>
-          <Button icon='bookmark' label='Logout' raised primary onClick={this.handleLogout} />
+          <Button label='Logout' raised primary onClick={this.handleLogout} />
         </div>
         <MenuDivider />
         {this.renderNavigation()}
