@@ -24,3 +24,11 @@ export const authenticate = values =>
         return dispatch(loginSuccess())
       })
   )
+
+export const reAuthenticate = () =>
+  dispatch => (
+    api.get('self')
+      .then(data =>
+        dispatch(loginSuccess())
+      )
+  )
