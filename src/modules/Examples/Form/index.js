@@ -53,6 +53,7 @@ class FormExample extends Component {
 
     return (
       <section>
+        <h1>Form Example</h1>
         <form onSubmit={handleSubmit(this.handleSubmit)}>
           <Field
             name='plain'

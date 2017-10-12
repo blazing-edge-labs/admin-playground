@@ -43,12 +43,16 @@ class Navigation extends Component {
         text: 'Homepage',
         link: '/',
         exact: true
-      },
-      {
+      }, {
         text: 'Form Example',
         link: '/formExample'
-      },
-      {
+      }, {
+        text: 'Table Example',
+        link: '/tableExample'
+      }, {
+        text: 'Settings',
+        link: '/settings'
+      }, {
         text: 'Random page',
         link: '/longer/link'
       }
