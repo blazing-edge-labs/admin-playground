@@ -7,7 +7,7 @@ import { Button } from 'react-toolbox/lib/button'
 import { Card } from 'react-toolbox/lib/card'
 import { MenuDivider, MenuItem } from 'react-toolbox/lib/menu'
 
-import { logoutSuccess } from 'actions/user'
+import { logout } from 'actions/user'
 import './style.sass'
 
 class Navigation extends Component {
@@ -22,7 +22,7 @@ class Navigation extends Component {
   handleLogout () {
     const { dispatch } = this.props
 
-    dispatch(logoutSuccess())
+    dispatch(logout())
   }
 
   isActive (base, exact) {
@@ -58,7 +58,7 @@ class Navigation extends Component {
       <MenuItem
         key={elem.text}
         caption={elem.text}
-        className={this.isActive(elem.link, elem.exact) && 'active'}
+        className={this.isActive(elem.link, elem.exact) ? 'active' : ''}
         onClick={() => this.props.history.push(elem.link)}
       />
     ))

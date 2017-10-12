@@ -2,6 +2,8 @@ import 'whatwg-fetch'
 import store from 'store'
 import { SubmissionError } from 'redux-form'
 
+import errors from 'constants/errors'
+
 const encodeComponent = str =>
   encodeURIComponent(str)
     .replace(/[!'()*]/g, x => `%${x.charCodeAt(0).toString(16).toUpperCase()}`)
@@ -57,12 +59,13 @@ const jsonParser = response =>
     .then(body => ({ response, body }))
 
 const extractError = error => {
-  let debugInfo = { _error: error.error }
+  let debugInfo = { _error: errors(error.error) }
   if (error.code === 400) {
     error.errorv.body.forEach(err => {
-      debugInfo[err.path] = err.type
+      debugInfo[err.path] = errors(err.type)
     })
   }
+
   return debugInfo
 }
 

@@ -32,3 +32,9 @@ export const reAuthenticate = () =>
         dispatch(loginSuccess())
       )
   )
+
+export const logout = () =>
+  dispatch => {
+    store.remove('token')
+    return dispatch(logoutSuccess())
+  }
