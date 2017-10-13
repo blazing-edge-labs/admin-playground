@@ -8,7 +8,7 @@ import { Card } from 'react-toolbox/lib/card'
 import { MenuDivider, MenuItem } from 'react-toolbox/lib/menu'
 
 import { logout } from 'actions/user'
-import './style.sass'
+import './style.scss'
 
 class Navigation extends Component {
   constructor (props) {
@@ -62,7 +62,7 @@ class Navigation extends Component {
       <MenuItem
         key={elem.text}
         caption={elem.text}
-        className={this.isActive(elem.link, elem.exact) ? 'active' : ''}
+        styleName={this.isActive(elem.link, elem.exact) ? 'active' : ''}
         onClick={() => this.props.history.push(elem.link)}
       />
     ))
@@ -70,11 +70,11 @@ class Navigation extends Component {
 
   render () {
     return (
-      <Card className='menu'>
+      <Card styleName='menu'>
         <div>
           User Block
         </div>
-        <div className='center'>
+        <div styleName='center'>
           <Button label='Logout' raised primary onClick={this.handleLogout} />
         </div>
         <MenuDivider />

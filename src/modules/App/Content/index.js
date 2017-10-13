@@ -7,12 +7,12 @@ import TableExample from 'modules/Examples/Table'
 import Menu from '../Menu'
 import NotFound from '../NotFound'
 
-import './style.sass'
+import './style.scss'
 
 class Content extends Component {
   render () {
     return (
-      <div className='layout'>
+      <div styleName='layout'>
         <Menu />
         <main>
           <Switch>

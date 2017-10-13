@@ -61,9 +61,12 @@ module.exports = {
           'postcss-loader'
         ]
       }, {
-        test: /\.sass$/,
-        loaders: ['style-loader', 'css-loader', 'sass-loader']
-      }, {
+        test: /\.scss$/,
+        loaders: [
+          'style-loader',
+          'css-loader?importLoaders=1&modules&localIdentName=[local]--[hash:base64:8]',
+          'sass-loader'
+        ]}, {
         test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
         use: 'url-loader?limit=10000&mimetype=application/font-woff'
       }, {

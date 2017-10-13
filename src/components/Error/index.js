@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import './style.sass'
+import './style.scss'
 
 const Error = ({ error }) => (
-  <div className='error'>
+  <div styleName='error'>
     {error}
   </div>
 )

@@ -11,7 +11,7 @@ import Input from 'components/Input'
 import { authenticate } from 'actions/user'
 import { isRequired } from 'utils/validator'
 
-import './style.sass'
+import './style.scss'
 
 class Login extends Component {
   constructor (props) {
@@ -30,9 +30,9 @@ class Login extends Component {
     const { handleSubmit, error } = this.props
 
     return (
-      <div className='page'>
-        <main className='wrapper'>
-          <Card className='card'>
+      <div styleName='page'>
+        <main styleName='wrapper'>
+          <Card styleName='card'>
             <h1>Application name</h1>
             <form onSubmit={handleSubmit(this.handleSubmit)}>
               <Field
@@ -49,8 +49,8 @@ class Login extends Component {
                 label='Password'
                 floating
               />
-              <div className='center'>
-                <Button raised type='submit' className='button' primary label='Login' />
+              <div styleName='center'>
+                <Button raised type='submit' primary label='Login' />
               </div>
               <ErrorComponent error={error} />
             </form>

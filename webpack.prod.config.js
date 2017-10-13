@@ -56,10 +56,13 @@ module.exports = {
           }, 'postcss-loader']
         })
       }, {
-        test: /\.sass$/,
+        test: /\.scss$/,
         loader: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: ['css-loader', 'sass-loader']
+          use: [
+            'css-loader?importLoaders=1&modules&localIdentName=[local]--[hash:base64:8]',
+            'sass-loader'
+          ]
         })
       }, {
         test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,

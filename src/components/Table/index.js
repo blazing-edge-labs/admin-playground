@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import './styles.sass'
+import './styles.scss'
 
 function renderHead (elements) {
   return (
-    <tr className='head'>
+    <tr styleName='tr head'>
       {elements.map(elem => (
-        <th key={elem}>
+        <th styleName='th' key={elem}>
           {elem}
         </th>
       ))}
@@ -17,7 +17,7 @@ function renderHead (elements) {
 
 function renderBody (rows) {
   return rows.map((row, i) => (
-    <tr key={i} onClick={row.onClick}>
+    <tr styleName='tr' key={i} onClick={row.onClick}>
       {row.elements.map((elem, i) => (
         <td key={`${row.key}-${elem}-${i}`}>
           {elem}
@@ -29,7 +29,7 @@ function renderBody (rows) {
 
 const TableComponent = ({ head, rows }) => {
   return (
-    <table>
+    <table styleName='table'>
       <thead>
         {renderHead(head)}
       </thead>
