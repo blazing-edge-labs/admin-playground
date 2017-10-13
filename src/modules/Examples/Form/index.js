@@ -113,7 +113,9 @@ class FormExample extends Component {
             label='Date picker'
             component={DatePicker}
           />
-          <Button raised type='submit' className='button' primary label='Login' />
+          <div>
+            <Button raised type='submit' className='button' primary label='Login' />
+          </div>
         </form>
       </section>
     )

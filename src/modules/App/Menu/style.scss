@@ -1,7 +1,9 @@
 .menu {
+  overflow: hidden;
   display: flex;
+  position: fixed;
   flex-direction: column;
-  width: 200px;
+  width: 260px;
   height: 100vh;
 }
 

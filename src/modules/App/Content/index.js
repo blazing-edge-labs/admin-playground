@@ -12,17 +12,17 @@ import './style.scss'
 class Content extends Component {
   render () {
     return (
-      <div styleName='layout'>
+      <main styleName='layout'>
         <Menu />
-        <main>
+        <div styleName='content'>
           <Switch>
             <Route exact path='/' component={Home} />
             <Route path='/formExample' component={FormExample} />
             <Route path='/tableExample' component={TableExample} />
             <Route path='*' component={NotFound} />
           </Switch>
-        </main>
-      </div>
+        </div>
+      </main>
     )
   }
 }
