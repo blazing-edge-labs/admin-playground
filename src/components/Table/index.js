@@ -17,9 +17,9 @@ function renderHead (elements) {
 
 function renderBody (rows) {
   return rows.map((row, i) => (
-    <tr styleName='tr' key={i} onClick={row.onClick}>
+    <tr styleName={`tr ${row.onClick ? 'clickable' : ''}`} key={i} onClick={row.onClick}>
       {row.elements.map((elem, i) => (
-        <td key={`${row.key}-${elem}-${i}`}>
+        <td styleName='td' key={`${row.key}-${elem}-${i}`}>
           {elem}
         </td>
       ))}

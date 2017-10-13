@@ -1,31 +1,43 @@
 .table {
-  width: 100%;
+  width: 800px;
   overflow: hidden;
   text-align: left;
 }
 
 .tr {
-  cursor: auto;
+  display: flex;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 24px;
+  border-bottom-color: rgba(0,0,0,.12);
 }
 
 .tr.clickable {
   cursor: pointer;
   transition: all 0.3s ease;
 
-  :hover {
+  &:hover {
     background-color: #e8ecf2;
   }
 }
 
 .tr.head {
-  background-color: gray;
-  color: white;
-  font-weight: 700;
-  text-transform: uppercase;
+  padding: 0 24px
 }
 
-.th, .td {
-  padding: 18px 25px;
+.th {
+  flex: 1;
+  color: rgba(0,0,0,.54);
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.td {
+  flex: 1;
+  color: rgba(0,0,0,.87);
+  font-size: 14px;
 }
 
 .center {
