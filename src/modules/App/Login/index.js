@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { reduxForm, Field, SubmissionError } from 'redux-form'
-import { Card } from 'react-toolbox/lib/card'
-// import { TextField } from 'redux-form-material-ui'
+import store from 'store'
+import get from 'lodash/get'
 
+import { reAuthenticate, authenticate } from 'actions/user'
 import { Button } from 'react-toolbox/lib/button'
+import { Card } from 'react-toolbox/lib/card'
 import ErrorComponent from 'components/Error'
 import Input from 'components/Input'
-import { authenticate } from 'actions/user'
 import { isRequired } from 'utils/validator'
 
 import './style.scss'
@@ -18,6 +19,19 @@ class Login extends Component {
     super(props)
 
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.reAuthenticate = this.reAuthenticate.bind(this)
+
+    this.reAuthenticate()
+  }
+
+  reAuthenticate () {
+    // TODO: Come up with a design for showing user the reauthentication process
+    const { dispatch, history, location } = this.props
+
+    if (store.get('token')) {
+      return dispatch(reAuthenticate())
+        .then(() => history.replace(get(location, 'state.from.pathname', '/')))
+    }
   }
 
   handleSubmit (values) {
@@ -64,6 +78,8 @@ class Login extends Component {
 Login.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
   error: PropTypes.string
 }
 
