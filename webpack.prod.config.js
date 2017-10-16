@@ -61,7 +61,13 @@ module.exports = {
           fallback: 'style-loader',
           use: [
             'css-loader?importLoaders=1&modules&localIdentName=[local]--[hash:base64:8]',
-            'sass-loader'
+            'sass-loader',
+            {
+              loader: 'sass-resources-loader',
+              options: {
+                resources: './src/styles/resources.scss'
+              }
+            }
           ]
         })
       }, {
