@@ -25,7 +25,10 @@ class EditProfile extends Component {
       <section>
         <h1>Edit Profile</h1>
         <form onSubmit={handleSubmit(this.handleSubmit)}>
-          <ImageUploader />
+          <Field
+            name='photo'
+            component={ImageUploader}
+          />
           <Field
             name='username'
             label='Usernamee'
@@ -49,6 +52,10 @@ EditProfile.propTypes = {
 }
 
 const l1 = reduxForm({ form: 'EditProfile' })(EditProfile)
-const l2 = connect()(l1)
+const l2 = connect(() => ({
+  initialValues: {
+    photo: 'https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg'
+  }
+}))(l1)
 
 export default l2

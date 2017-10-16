@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import AvatarEditor from 'react-avatar-editor'
 
 import { Button } from 'react-toolbox/lib/button'
+import Slider from 'react-toolbox/lib/slider'
 import './styles.scss'
-
-// TODO: Redux
-// TODO: Preview
-// TODO: interface for both previewing and editing the image
 
 class ImageUploader extends Component {
   constructor (props) {
@@ -14,8 +12,10 @@ class ImageUploader extends Component {
 
     this.state = {
       image: null,
-      scale: 1,
-      editing: false
+      dataURI: null,
+      scale: 1.1,
+      editing: false,
+      dropped: false
     }
 
     this.handleNewImage = this.handleNewImage.bind(this)
@@ -23,6 +23,8 @@ class ImageUploader extends Component {
     this.setEditorRef = this.setEditorRef.bind(this)
     this.handleSave = this.handleSave.bind(this)
     this.toggleEditMode = this.toggleEditMode.bind(this)
+    this.openPicker = this.openPicker.bind(this)
+    this.onDropFile = this.onDropFile.bind(this)
   }
 
   toggleEditMode () {
@@ -31,10 +33,30 @@ class ImageUploader extends Component {
     this.setState({ editing: !editing })
   }
 
+  openPicker () {
+    this.refs.hiddenUpload.click()
+  }
+
+  onDropFile (e) {
+    this.setState({
+      dropped: true
+    })
+  }
+
   handleSave (data) {
+    const { input, handleChange } = this.props
     const img = this.editor.getImageScaledToCanvas().toDataURL()
 
-    console.log(img)
+    this.setState({
+      image: null,
+      dropped: false,
+      scale: 1.1,
+      dataURI: img
+    })
+    this.toggleEditMode()
+    input.onChange(img)
+
+    if (handleChange) handleChange(img)
   }
 
   handleNewImage (e) {
@@ -47,13 +69,13 @@ class ImageUploader extends Component {
     if (ref) this.editor = ref
   }
 
-  handleScale (e) {
-    const scale = parseFloat(e.target.value)
+  handleScale (val) {
+    const scale = parseFloat(val)
     this.setState({ scale })
   }
 
   renderEditing () {
-    const { image, scale } = this.state
+    const { image, scale, dropped } = this.state
 
     return (
       <div styleName='container'>
@@ -63,31 +85,36 @@ class ImageUploader extends Component {
           height={250}
           image={image}
           scale={scale}
+          onDropFile={this.onDropFile}
         />
-        <div>
-          <input name='newImage' type='file' onChange={this.handleNewImage} />
-        </div>
-        <div>
+        <input
+          ref='hiddenUpload'
+          styleName='hidden'
+          name='newImage'
+          type='file'
+          onChange={this.handleNewImage}
+        />
+        <div styleName={image || dropped ? '' : 'hidden'}>
           Zoom:
-          <input
-            name='scale'
-            type='range'
+          <Slider
+            value={scale}
             onChange={this.handleScale}
-            min={'1'}
-            max='5'
-            step='0.01'
-            defaultValue='1'
+            min={1}
+            max={5}
+            step={0.1}
           />
         </div>
-        <div>
-          <input type='button' onClick={this.handleSave} value='Preview' />
-        </div>
-        <div>
+        <div styleName='buttonContainer'>
           <Button styleName='button' raised onClick={this.toggleEditMode}>
             Cancel
           </Button>
-          <Button styleName='button' raised onClick={this.toggleEditMode}>
-            Save
+          <Button
+            styleName='button'
+            primary
+            raised
+            onClick={image || dropped ? this.handleSave : this.openPicker}
+          >
+            {image || dropped ? 'Save' : 'Choose an image'}
           </Button>
         </div>
       </div>
@@ -95,10 +122,13 @@ class ImageUploader extends Component {
   }
 
   renderImage () {
+    const { input: { value } } = this.props
+    const { dataURI } = this.state
+
     return (
       <div>
-        <img styleName='photo' src='https://image.freepik.com/free-icon/male-user-shadow_318-34042.jpg' />
-        <div>
+        <img styleName='photo' src={dataURI || value} />
+        <div styleName={dataURI || value ? 'buttonContainer' : ''}>
           <Button styleName='photo' raised onClick={this.toggleEditMode}>
             Upload new photo
           </Button>
@@ -110,12 +140,15 @@ class ImageUploader extends Component {
   render () {
     const { editing } = this.state
 
-    if (editing) {
-      return this.renderEditing()
-    }
+    if (editing) return this.renderEditing()
 
     return this.renderImage()
   }
+}
+
+ImageUploader.propTypes = {
+  input: PropTypes.object.isRequired,
+  handleChange: PropTypes.func
 }
 
 export default ImageUploader

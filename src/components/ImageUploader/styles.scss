@@ -7,6 +7,17 @@
   width: 200px;
 }
 
+.hidden {
+  display: none;
+}
+
+.buttonContainer {
+  display: flex;
+  width: 300px;
+  margin-top: 10px;
+  justify-content: space-between;
+}
+
 .button {
-  width: 200px
+  width: 145px;
 }
