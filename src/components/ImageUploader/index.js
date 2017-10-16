@@ -25,6 +25,21 @@ class ImageUploader extends Component {
     this.toggleEditMode = this.toggleEditMode.bind(this)
     this.openPicker = this.openPicker.bind(this)
     this.onDropFile = this.onDropFile.bind(this)
+    this.resetSelection = this.resetSelection.bind(this)
+    this.handleCancel = this.handleCancel.bind(this)
+  }
+
+  resetSelection () {
+    this.setState({
+      image: null,
+      dropped: false,
+      scale: 1.1
+    })
+  }
+
+  handleCancel () {
+    this.resetSelection()
+    this.toggleEditMode()
   }
 
   toggleEditMode () {
@@ -48,11 +63,9 @@ class ImageUploader extends Component {
     const img = this.editor.getImageScaledToCanvas().toDataURL()
 
     this.setState({
-      image: null,
-      dropped: false,
-      scale: 1.1,
       dataURI: img
     })
+    this.resetSelection()
     this.toggleEditMode()
     input.onChange(img)
 
@@ -105,7 +118,7 @@ class ImageUploader extends Component {
           />
         </div>
         <div styleName='buttonContainer'>
-          <Button styleName='button' raised onClick={this.toggleEditMode}>
+          <Button styleName='button' raised onClick={this.handleCancel}>
             Cancel
           </Button>
           <Button
