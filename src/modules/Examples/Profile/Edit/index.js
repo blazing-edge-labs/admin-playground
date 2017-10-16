@@ -31,7 +31,7 @@ class EditProfile extends Component {
           />
           <Field
             name='username'
-            label='Usernamee'
+            label='Username'
             component={Input}
           />
           <Field
@@ -39,7 +39,7 @@ class EditProfile extends Component {
             label='Email'
             component={Input}
           />
-          <Button raised type='submit' className='button' primary label='Login' />
+          <Button raised type='submit' className='button' primary label='Save' />
         </form>
       </section>
     )
@@ -54,7 +54,7 @@ EditProfile.propTypes = {
 const l1 = reduxForm({ form: 'EditProfile' })(EditProfile)
 const l2 = connect(() => ({
   initialValues: {
-    photo: 'https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg'
+    photo: 'https://avatars3.githubusercontent.com/u/32059990?s=200&v=4'
   }
 }))(l1)
 
