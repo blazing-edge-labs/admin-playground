@@ -4,10 +4,10 @@ import Table from 'components/Table'
 
 export default function () {
   const tableRows = [{
-    elements: ['Mateo', 'Karadza', '', 'mateo@blazingedge.io'],
+    elements: ['Mateo', 'Karadza', <p>A react component</p>, 'mateo@blazingedge.io'],
     onClick: function () {}
   }, {
-    elements: ['Jane', 'Doe', 'blazingedge.io', 'info@blazingedge.io']
+    elements: ['Jane', 'Doe', <a href='https://blazingedge.io/' target='_blank'>blazingedge.io</a>, 'info@blazingedge.io']
   }, {
     elements: ['John', 'Doe', '', 'engineering@blazingedge.io']
   }]
