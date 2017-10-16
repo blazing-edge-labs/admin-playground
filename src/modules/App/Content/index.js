@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
+import Card from 'react-toolbox/lib/card'
 
 import Home from 'modules/Home'
 import FormExample from 'modules/Examples/Form'
@@ -14,14 +15,14 @@ class Content extends Component {
     return (
       <main styleName='layout'>
         <Menu />
-        <div styleName='content'>
+        <Card styleName='content'>
           <Switch>
             <Route exact path='/' component={Home} />
             <Route path='/formExample' component={FormExample} />
             <Route path='/tableExample' component={TableExample} />
             <Route path='*' component={NotFound} />
           </Switch>
-        </div>
+        </Card>
       </main>
     )
   }
