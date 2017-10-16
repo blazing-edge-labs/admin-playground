@@ -1,0 +1,54 @@
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { Field, reduxForm } from 'redux-form'
+
+import { Button } from 'react-toolbox/lib/button'
+import ImageUploader from 'components/ImageUploader'
+import Input from 'components/Input'
+
+class EditProfile extends Component {
+  constructor (props) {
+    super(props)
+
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  handleSubmit (values) {
+    console.log(values)
+  }
+
+  render () {
+    const { handleSubmit } = this.props
+
+    return (
+      <section>
+        <h1>Edit Profile</h1>
+        <form onSubmit={handleSubmit(this.handleSubmit)}>
+          <ImageUploader />
+          <Field
+            name='username'
+            label='Usernamee'
+            component={Input}
+          />
+          <Field
+            name='email'
+            label='Email'
+            component={Input}
+          />
+          <Button raised type='submit' className='button' primary label='Login' />
+        </form>
+      </section>
+    )
+  }
+}
+
+EditProfile.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired
+}
+
+const l1 = reduxForm({ form: 'EditProfile' })(EditProfile)
+const l2 = connect()(l1)
+
+export default l2

@@ -50,8 +50,8 @@ class Navigation extends Component {
         text: 'Table Example',
         link: '/tableExample'
       }, {
-        text: 'Settings',
-        link: '/settings'
+        text: 'Edit Profile',
+        link: '/profile/edit'
       }, {
         text: 'Random page',
         link: '/longer/link'

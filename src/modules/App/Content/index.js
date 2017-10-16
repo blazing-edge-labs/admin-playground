@@ -5,6 +5,7 @@ import Card from 'react-toolbox/lib/card'
 import Home from 'modules/Home'
 import FormExample from 'modules/Examples/Form'
 import TableExample from 'modules/Examples/Table'
+import EditProfile from 'modules/Examples/Profile/Edit'
 import Menu from '../Menu'
 import NotFound from '../NotFound'
 
@@ -20,6 +21,7 @@ class Content extends Component {
             <Route exact path='/' component={Home} />
             <Route path='/formExample' component={FormExample} />
             <Route path='/tableExample' component={TableExample} />
+            <Route path='/profile/edit' component={EditProfile} />
             <Route path='*' component={NotFound} />
           </Switch>
         </Card>
