@@ -6,6 +6,8 @@ import { Button } from 'react-toolbox/lib/button'
 import Slider from 'react-toolbox/lib/slider'
 import './styles.scss'
 
+// TODO: Add validation for file types
+
 class ImageUploader extends Component {
   constructor (props) {
     super(props)
@@ -17,6 +19,8 @@ class ImageUploader extends Component {
       editing: false,
       dropped: false
     }
+
+    this.hiddenUpload = null
 
     this.handleNewImage = this.handleNewImage.bind(this)
     this.handleScale = this.handleScale.bind(this)
@@ -49,7 +53,7 @@ class ImageUploader extends Component {
   }
 
   openPicker () {
-    this.refs.hiddenUpload.click()
+    this.hiddenUpload.click()
   }
 
   onDropFile (e) {
@@ -101,7 +105,7 @@ class ImageUploader extends Component {
           onDropFile={this.onDropFile}
         />
         <input
-          ref='hiddenUpload'
+          ref={ref => { this.hiddenUpload = ref }}
           styleName='hidden'
           name='newImage'
           type='file'
