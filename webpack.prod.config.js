@@ -1,3 +1,4 @@
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 const webpack = require('webpack')
@@ -10,6 +11,7 @@ module.exports = {
   entry: path.join(__dirname, 'src/index.js'),
   output: {
     path: path.join(__dirname, 'dist'),
+    filename: '[name]-[hash].js',
     publicPath: '/'
   },
   optimization: {
@@ -32,11 +34,16 @@ module.exports = {
       inject: 'body',
       filename: 'index.html'
     }),
+    new CopyWebpackPlugin([{
+      from: './_redirects',
+      to: './_redirects',
+      toType: 'file'
+    }]),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
       __API_URL__: JSON.stringify(process.env.API_URL)
     }),
-    new ExtractTextPlugin('style.css', { allChunks: true }),
+    new ExtractTextPlugin('style-[hash].css', { allChunks: true }),
     new webpack.optimize.AggressiveMergingPlugin()
   ],
   module: {
