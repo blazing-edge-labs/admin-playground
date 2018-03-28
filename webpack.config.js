@@ -3,12 +3,12 @@ const path = require('path')
 const webpack = require('webpack')
 
 module.exports = {
+  mode: 'development',
   devtool: 'cheap-module-eval-source-map',
   entry: [
     'babel-polyfill',
-    'react-hot-loader/patch',
-    'webpack-dev-server/client?http://0.0.0.0:7000',
-    'webpack/hot/only-dev-server',
+    // 'react-hot-loader/patch',
+    'webpack-hot-middleware/client?reload=true',
     path.join(__dirname, 'src/index')
   ],
   output: {
@@ -26,7 +26,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'src/index.tpl.html'),
+      template: path.join(__dirname, 'src/index.tpl.dev.html'),
       inject: 'body',
       filename: 'index.html'
     }),
@@ -52,7 +52,7 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              modules: true, // default is false
+              modules: true,
               sourceMap: true,
               importLoaders: 1,
               localIdentName: '[name]--[local]--[hash:base64:8]'
@@ -72,22 +72,7 @@ module.exports = {
               resources: './src/styles/resources.scss'
             }
           }
-        ]}, {
-        test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-        use: 'url-loader?limit=10000&mimetype=application/font-woff'
-      }, {
-        test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-        use: 'url-loader?limit=10000&mimetype=application/font-woff'
-      }, {
-        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        use: 'url-loader?limit=10000&mimetype=application/octet-stream'
-      }, {
-        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        use: 'file-loader'
-      }, {
-        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        use: 'url-loader?limit=10000&mimetype=image/svg+xml'
-      }
+        ]}
     ]
   },
   node: {

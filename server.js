@@ -1,15 +1,24 @@
-var webpack = require('webpack')
-var WebpackDevServer = require('webpack-dev-server')
-var config = require('./webpack.config')
+const webpack = require('webpack')
+const middleware = require('webpack-dev-middleware')
+const hotMiddleware = require('webpack-hot-middleware')
+const config = require('./webpack.config')
+const compiler = webpack(config)
 
-new WebpackDevServer(webpack(config), {
-  publicPath: config.output.publicPath,
-  hot: true,
-  historyApiFallback: true
-}).listen(7000, 'localhost', function (err, result) {
-  if (err) {
-    return console.log(err)
-  }
+const express = require('express')
+const history = require('connect-history-api-fallback')
+const path = require('path')
+const app = express()
+const staticDir = path.join(__dirname, 'dist')
 
-  console.log('Listening at http://localhost:7000/')
-})
+app.use(history())
+
+app.use(middleware(compiler, {
+  publicPath: '/'
+}))
+app.use(hotMiddleware(compiler, {
+  path: '/__webpack_hmr'
+}))
+
+app.use(express.static(staticDir))
+
+app.listen(7000, () => console.log('App listening on port 7000'))
