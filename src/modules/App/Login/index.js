@@ -20,7 +20,9 @@ class Login extends Component {
 
     this.handleSubmit = this.handleSubmit.bind(this)
     this.reAuthenticate = this.reAuthenticate.bind(this)
+  }
 
+  componentDidMount () {
     this.reAuthenticate()
   }
 

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux'
+import { hot } from 'react-hot-loader'
 
 import theStore from './../../store'
-
 import PrivateRoute from 'components/Routes/Private'
 import GuestRoute from 'components/Routes/Guest'
 import Content from './Content'
@@ -24,4 +24,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default hot(module)(App)
